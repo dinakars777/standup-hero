@@ -2,7 +2,7 @@
 
 > A fast, beautiful CLI tool to automatically generate your daily standup notes from your local Git history.
 
-![standup-hero screenshot](./screenshot.png) *(Imagine a beautiful clack-based terminal here)*
+> *(A beautiful, interactive CLI built with `@clack/prompts`)*
 
 ## The Problem
 It's 9:55 AM. Daily standup is in 5 minutes. You can't remember exactly what you worked on yesterday across 3 different microservices.
