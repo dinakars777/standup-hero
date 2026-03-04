@@ -1,0 +1,38 @@
+{
+  "name": "@dinakars777/standup-hero",
+  "version": "1.0.0",
+  "description": "🦸‍♂️ Fast CLI tool to generate beautiful markdown daily standups from local Git history.",
+  "main": "dist/index.js",
+  "bin": {
+    "standup-hero": "dist/index.js",
+    "standup": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs --clean",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "cli",
+    "standup",
+    "git",
+    "history",
+    "markdown",
+    "auto",
+    "clipboard"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "clipboardy": "^4.0.0",
+    "commander": "^12.0.0",
+    "picocolors": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  }
+}
