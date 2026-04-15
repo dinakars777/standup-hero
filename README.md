@@ -6,6 +6,8 @@
 
 > Automatically generate your daily standup notes from your local Git history.
 
+**[🌐 View Landing Page](https://dinakars777.github.io/standup-hero/)**
+
 It's 9:55 AM. Standup is in 5 minutes. You can't remember what you worked on yesterday across 3 different repos. **standup-hero** eliminates that anxiety — one command, instant Slack-ready notes.
 
 ## Features
