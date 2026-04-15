@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standup Hero - Never Scramble for Standup Notes Again</title>
+    <meta name="description" content="Automatically generate your daily standup notes from your local Git history. One command, instant Slack-ready notes.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-emoji">🦸</div>
+            <h1>Standup Hero</h1>
+            <p class="tagline">Never scramble for standup notes again</p>
+            
+            <div class="cta-buttons">
+                <button class="btn-primary" onclick="copyCommand()">
+                    <span class="btn-text">npx @dinakars777/standup-hero</span>
+                    <span class="btn-icon">📋</span>
+                </button>
+                <a href="https://github.com/dinakars777/standup-hero" class="btn-secondary" target="_blank">
+                    ⭐ Star on GitHub
+                </a>
+            </div>
+            
+            <div class="demo-container">
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span class="terminal-title">Terminal</span>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line">
+                            <span class="prompt">$</span> npx @dinakars777/standup-hero
+                        </div>
+                        <div class="terminal-output">
+                            <div class="output-line">📋 Standup notes for John Doe (Yesterday):</div>
+                            <div class="output-line"></div>
+                            <div class="output-line">• Fixed authentication bug in login flow</div>
+                            <div class="output-line">• Updated user dashboard with new metrics</div>
+                            <div class="output-line">• Refactored API error handling</div>
+                            <div class="output-line">• Added unit tests for payment service</div>
+                            <div class="output-line"></div>
+                            <div class="output-line success">✓ Copied to clipboard!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>It's 9:55 AM. Standup in 5 minutes.</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">😰</div>
+                    <p>Can't remember what you did yesterday</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🔄</div>
+                    <p>Switching between 3 different repos</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">📜</div>
+                    <p>Scrolling through messy git logs</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">⌨️</div>
+                    <p>Typing the same updates manually</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="container">
+            <h2>One command. Instant Slack-ready notes.</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Auto-scans Git history</h3>
+                    <p>Automatically reads your commits from yesterday (or any timeframe)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>Clean formatting</h3>
+                    <p>Converts messy commit messages into clean, professional bullet points</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Instant clipboard</h3>
+                    <p>Copies to clipboard automatically - just Cmd+V into Slack</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Smart Monday logic</h3>
+                    <p>Automatically grabs Friday's commits when it's Monday</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning fast</h3>
+                    <p>Uses native git log - no API calls, no delays</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Zero config</h3>
+                    <p>Works out of the box in any Git repo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Run the command</h3>
+                    <code>npx @dinakars777/standup-hero</code>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Get formatted notes</h3>
+                    <p>Clean bullet points from your commits</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Paste in Slack</h3>
+                    <p>Already in your clipboard!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation -->
+    <section class="installation">
+        <div class="container">
+            <h2>Installation</h2>
+            <div class="install-options">
+                <div class="install-card">
+                    <h3>Quick Try (No Install)</h3>
+                    <div class="code-block">
+                        <code>npx @dinakars777/standup-hero</code>
+                        <button class="copy-btn" onclick="copyToClipboard('npx @dinakars777/standup-hero')">📋</button>
+                    </div>
+                </div>
+                <div class="install-card">
+                    <h3>Global Install</h3>
+                    <div class="code-block">
+                        <code>npm install -g @dinakars777/standup-hero</code>
+                        <button class="copy-btn" onclick="copyToClipboard('npm install -g @dinakars777/standup-hero')">📋</button>
+                    </div>
+                    <p class="install-note">Then just type <code>standup</code> in any repo</p>
+                </div>
+            </div>
+            
+            <div class="options-section">
+                <h3>Options</h3>
+                <table class="options-table">
+                    <thead>
+                        <tr>
+                            <th>Flag</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>--days &lt;n&gt;</code></td>
+                            <td>Look back N days instead of 1</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to save 5 minutes every morning?</h2>
+            <div class="cta-buttons">
+                <button class="btn-primary large" onclick="copyCommand()">
+                    <span class="btn-text">npx @dinakars777/standup-hero</span>
+                    <span class="btn-icon">📋</span>
+                </button>
+            </div>
+            <p class="cta-subtext">No signup. No config. Just works.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Built with ❤️ by <a href="https://github.com/dinakars777" target="_blank">@dinakars777</a></p>
+            <div class="footer-links">
+                <a href="https://github.com/dinakars777/standup-hero" target="_blank">GitHub</a>
+                <a href="https://www.npmjs.com/package/@dinakars777/standup-hero" target="_blank">npm</a>
+                <a href="https://github.com/dinakars777/standup-hero/issues" target="_blank">Issues</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
