@@ -12,10 +12,10 @@ It's 9:55 AM. Standup is in 5 minutes. You can't remember what you worked on yes
 
 ## Features
 
-- ✨ Zero configuration — just type `standup` in any Git repo
-- 📋 Auto-copies the result to your clipboard — just hit `Cmd+V` in Slack
-- ⚡ Lightning fast — uses native `git log` under the hood
-- 🧠 Smart Monday logic — automatically grabs Friday's commits on Mondays
+- ✨ Zero config — just type `standup`
+- 📋 Auto-copies to clipboard — hit `Cmd+V` in Slack
+- ⚡ Fast — uses native `git log`
+- 🧠 Smart Monday logic — grabs Friday's commits on Mondays
 
 ## Quick Start
 
