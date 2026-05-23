@@ -30,17 +30,18 @@ var import_picocolors2 = __toESM(require("picocolors"));
 
 // src/core.ts
 var import_child_process = require("child_process");
+var import_path = __toESM(require("path"));
 function getGitAuthor() {
   try {
-    return (0, import_child_process.execSync)("git config user.name", { encoding: "utf-8" }).trim();
+    return (0, import_child_process.execFileSync)("git", ["config", "user.name"], { encoding: "utf-8" }).trim();
   } catch (e) {
     throw new Error('Could not determine Git author. Please ensure you have configured git (git config --global user.name "Your Name").');
   }
 }
 function getRepoName() {
   try {
-    const rootPath = (0, import_child_process.execSync)("git rev-parse --show-toplevel", { encoding: "utf-8" }).trim();
-    return rootPath.split("/").pop() || "Unknown Repo";
+    const rootPath = (0, import_child_process.execFileSync)("git", ["rev-parse", "--show-toplevel"], { encoding: "utf-8" }).trim();
+    return import_path.default.basename(rootPath) || "Unknown Repo";
   } catch (error) {
     throw new Error("Not currently inside a Git repository! Please run this command from within a project folder.");
   }
@@ -55,16 +56,22 @@ function getCommits(author, daysAgo) {
     }
   }
   try {
-    const rawOutput = (0, import_child_process.execSync)(`git log --author="${author}" --since="${sinceArg}" --no-merges --pretty=format:"%h|%s|%cr"`, { encoding: "utf-8" });
+    const fieldSeparator = "";
+    const recordSeparator = "";
+    const rawOutput = (0, import_child_process.execFileSync)("git", [
+      "log",
+      `--author=${author}`,
+      `--since=${sinceArg}`,
+      "--no-merges",
+      `--pretty=format:%h%x1f%s%x1f%cr%x1e`
+    ], { encoding: "utf-8" });
     if (!rawOutput.trim()) {
       return [];
     }
-    const commits = [];
-    const lines = rawOutput.split("\n");
-    for (const line of lines) {
-      const [hash, message, date] = line.split("|");
-      commits.push({ hash, message, date, repoName });
-    }
+    const commits = rawOutput.split(recordSeparator).map((record) => record.trim()).filter(Boolean).map((record) => {
+      const [hash, message, date] = record.split(fieldSeparator);
+      return { hash, message, date, repoName };
+    }).filter((commit) => commit.hash && commit.message && commit.date);
     return commits.reverse();
   } catch (error) {
     return [];
