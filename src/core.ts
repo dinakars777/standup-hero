@@ -1,4 +1,5 @@
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
+import path from 'path';
 
 export interface CommitInfo {
     hash: string;
@@ -12,7 +13,7 @@ export interface CommitInfo {
  */
 export function getGitAuthor(): string {
     try {
-        return execSync('git config user.name', { encoding: 'utf-8' }).trim();
+        return execFileSync('git', ['config', 'user.name'], { encoding: 'utf-8' }).trim();
     } catch (e) {
         throw new Error('Could not determine Git author. Please ensure you have configured git (git config --global user.name "Your Name").');
     }
@@ -23,8 +24,8 @@ export function getGitAuthor(): string {
  */
 export function getRepoName(): string {
     try {
-        const rootPath = execSync('git rev-parse --show-toplevel', { encoding: 'utf-8' }).trim();
-        return rootPath.split('/').pop() || 'Unknown Repo';
+        const rootPath = execFileSync('git', ['rev-parse', '--show-toplevel'], { encoding: 'utf-8' }).trim();
+        return path.basename(rootPath) || 'Unknown Repo';
     } catch (error) {
         throw new Error('Not currently inside a Git repository! Please run this command from within a project folder.');
     }
@@ -47,22 +48,31 @@ export function getCommits(author: string, daysAgo: number): CommitInfo[] {
     }
 
     try {
-        // Format string: %h (hash), %s (subject/message), %cr (relative date)
-        const rawOutput = execSync(`git log --author="${author}" --since="${sinceArg}" --no-merges --pretty=format:"%h|%s|%cr"`, { encoding: 'utf-8' });
+        const fieldSeparator = '\x1f';
+        const recordSeparator = '\x1e';
+        const rawOutput = execFileSync('git', [
+            'log',
+            `--author=${author}`,
+            `--since=${sinceArg}`,
+            '--no-merges',
+            `--pretty=format:%h%x1f%s%x1f%cr%x1e`,
+        ], { encoding: 'utf-8' });
 
         if (!rawOutput.trim()) {
             return [];
         }
 
-        const commits: CommitInfo[] = [];
-        const lines = rawOutput.split('\n');
+        const commits = rawOutput
+            .split(recordSeparator)
+            .map((record) => record.trim())
+            .filter(Boolean)
+            .map((record) => {
+                const [hash, message, date] = record.split(fieldSeparator);
+                return { hash, message, date, repoName };
+            })
+            .filter((commit) => commit.hash && commit.message && commit.date);
 
-        for (const line of lines) {
-            const [hash, message, date] = line.split('|');
-            commits.push({ hash, message, date, repoName });
-        }
-
-        return commits.reverse(); // Display oldest to newest for chronological logical progression
+        return commits.reverse(); // Display oldest to newest for chronological progression
 
     } catch (error) {
         return [];
